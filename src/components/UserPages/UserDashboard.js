@@ -3,6 +3,9 @@ import { useHistory, useParams, Redirect } from "react-router-dom";
 import UserBrowseEventsPage from "./UserBrowseEventsPage";
 import UserMyEventsPage from "./UserMyEventsPage";
 import UserCalendarPage from "./UserCalendarPage";
+
+import UserCreateEventPage from "./UserCreateEventPage";
+
 // import UserProfilePage from "./UserPages/UserProfilePage";
 import SideBar from "./UserSideBar";
 import { CssBaseline } from "@material-ui/core";
@@ -20,7 +23,7 @@ function showCurrentTab(tabIndex, subpage) {
     case 1:
       return <UserMyEventsPage subpage={subpage} />;
     case 2:
-      return <UserCalendarPage />;
+      return <UserCreateEventPage />;
     // case 3:
     //   return <UserProfilePage />;
     default:
@@ -32,7 +35,7 @@ export default function UserDashboard() {
   const { page, subpage } = useParams();
   const history = useHistory();
 
-  const tabNames = ["browse", "myevents", "calendar"];
+  const tabNames = ["browse", "myevents", "create"];
 
   const [currentPage, setCurrentPage] = useState(tabNames.indexOf(page));
 

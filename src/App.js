@@ -4,18 +4,28 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import SuperAdminDashboard from "./components/SuperAdminPages/SuperAdminDashboard";
 import UserDashboard from "./components/UserPages/UserDashboard";
 import { CssBaseline } from "@material-ui/core";
+import axios from "axios";
 
 export default function App() {
   // const [isNewUser, setNewUser] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [userInfo, setUserInfo] = useState({
     username: "",
     firstname: "",
     lastname: "",
-    isSuperAdmin: true,
+    isSuperAdmin: false,
   });
 
-  const handleLogin = () => {
+  const handleLogin = (user) => {
+    setIsLoggedIn(true);
+  };
+
+  const handleRegister = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleSignIn = () => {
     setIsLoggedIn(true);
   };
 
@@ -37,7 +47,7 @@ export default function App() {
                   <Redirect to="/user/browse" />
                 )
               ) : (
-                <LoginPage />
+                <LoginPage handleLogin={handleLogin} />
               )}
             </Route>
 

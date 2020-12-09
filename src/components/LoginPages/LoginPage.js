@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
-export default function LoginPage() {
+export default function LoginPage({ handleSignIn, handleRegister }) {
   const [isNewUser, setNewUser] = useState(false);
 
   const handleChangeLoginPage = () => {
@@ -12,9 +12,15 @@ export default function LoginPage() {
   return (
     <>
       {isNewUser ? (
-        <SignUp handleChangeLoginPage={handleChangeLoginPage} />
+        <SignUp
+          handleRegister={handleRegister}
+          handleChangeLoginPage={handleChangeLoginPage}
+        />
       ) : (
-        <SignIn handleChangeLoginPage={handleChangeLoginPage} />
+        <SignIn
+          handleSignIn={handleSignIn}
+          handleChangeLoginPage={handleChangeLoginPage}
+        />
       )}
     </>
   );

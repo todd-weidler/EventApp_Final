@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,31 +11,32 @@ import Container from "@material-ui/core/Container";
 import { Formik, Form } from "formik";
 import MyTextField from "../MyTextField";
 import * as Yup from "yup";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    width: "100%",
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
   },
   textfield: {
     marginTop: theme.spacing(0),
     marginBottom: theme.spacing(0),
     paddingTop: theme.spacing(0),
-    paddingBottom: 0
-  }
+    paddingBottom: 0,
+  },
 }));
 
 const signUpSchema = Yup.object().shape({
@@ -54,13 +55,37 @@ const signUpSchema = Yup.object().shape({
     ),
   confirmPW: Yup.string()
     .required("Required")
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
-export default function SignUp({ handleChangeLoginPage }) {
+export default function SignUp({ handleChangeLoginPage, handleLogin }) {
   const classes = useStyles();
 
-  const signUp = () => {};
+  // const signUp = () => {
+
+  // };
+
+  const [isError, setIsError] = useState(false);
+
+  const handleRegister = async (values) => {
+    setTimeout(() => console.log("testing"), 4000);
+
+    // axios
+    //   .post("/register", {
+    //     username: values.username,
+    //     password: values.password,
+    //     email: values.email,
+    //     firstName: values.firstName,
+    //     lastName: values.lastName,
+    //   })
+    //   .then((res) => {
+    //     // save the username and password to local storage
+    //     console.log("Registration successful");
+    //   })
+    //   .catch((err) => {
+    //     console.log("Username already exists");
+    //   });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -80,10 +105,11 @@ export default function SignUp({ handleChangeLoginPage }) {
             username: "",
             email: "",
             password: "",
-            confirmPW: ""
+            confirmPW: "",
           }}
-          onSubmit={(values, actions) => {
-            signUp();
+          onSubmit={async (values) => {
+            // signUp();
+            await handleRegister(values);
           }}
           validationSchema={signUpSchema}
           validateOnChange
@@ -98,7 +124,7 @@ export default function SignUp({ handleChangeLoginPage }) {
             handleChange,
             handleBlur,
             handleSubmit,
-            handleReset
+            handleReset,
           }) => (
             <Form className={classes.form} noValidate>
               <Grid container spacing={2}>
@@ -199,6 +225,7 @@ export default function SignUp({ handleChangeLoginPage }) {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                disabled={isSubmitting}
               >
                 Sign Up
               </Button>

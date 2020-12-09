@@ -8,11 +8,9 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import CalendarIcon from "@material-ui/icons/DateRangeOutlined";
-// import LocationIcon from "@material-ui/icons/Room";
-// import UsersIcon from "@material-ui/icons/People";
 import MyEventsIcon from "@material-ui/icons/EventSeat";
 import BrowseEventsIcon from "@material-ui/icons/EventAvailableRounded";
+import CreateEventsIcon from "@material-ui/icons/Add";
 
 // const drawerWidth = 240;
 
@@ -21,42 +19,38 @@ const drawerWidth = 215;
 const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   drawerContainer: {
-    overflow: "auto"
+    overflow: "auto",
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
   },
   icon: {
-    color: "black"
+    color: "black",
   },
   label: {
     color: "black",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 }));
 
 const StyledListItem = withStyles({
   root: {
     backgroundColor: "default",
     "&.Mui-selected": {
-      backgroundColor: "rgba(255, 193, 5, .9)"
+      backgroundColor: "rgba(255, 193, 5, .9)",
     },
     "&.Mui-selected:hover": {
-      backgroundColor: "rgba(255, 193, 5, 1)"
-    }
-  }
+      backgroundColor: "rgba(255, 193, 5, 1)",
+    },
+  },
 })(ListItem);
-
-// Browse Events
-// My Events
-// Calendar
 
 export default function UserSideBar({ handlePageChange, currentPage }) {
   const classes = useStyles();
@@ -66,7 +60,7 @@ export default function UserSideBar({ handlePageChange, currentPage }) {
       className={classes.drawer}
       variant="permanent"
       classes={{
-        paper: classes.drawerPaper
+        paper: classes.drawerPaper,
       }}
     >
       <Toolbar />
@@ -102,11 +96,11 @@ export default function UserSideBar({ handlePageChange, currentPage }) {
             onClick={() => handlePageChange(2)}
           >
             <ListItemIcon>
-              <CalendarIcon
+              <CreateEventsIcon
                 className={currentPage === 2 ? classes.icon : null}
               />
             </ListItemIcon>
-            <ListItemText primary={"Calendar"} />
+            <ListItemText primary={"Create Events"} />
           </StyledListItem>
         </List>
         <Divider />

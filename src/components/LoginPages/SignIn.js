@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -13,36 +13,55 @@ import { Formik, Form } from "formik";
 import MyTextField from "../MyTextField";
 import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%",
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 const signInSchema = Yup.object().shape({
   username: Yup.string().required("Username required"),
-  password: Yup.string().required("Password Required")
+  password: Yup.string().required("Password Required"),
 });
 
-export default function SignIn({ handleChangeLoginPage }) {
+export default function SignIn({ handleChangeLoginPage, handleLogin }) {
   const classes = useStyles();
 
-  const handleSubmit = () => {};
+  const [isError, setIsError] = useState(false);
+  // const handleSubmit = () => {
+
+  // };
+
+  const handleSignIn = (values) => {
+    // axios
+    //   .post("/login", {
+    //     username: values.username,
+    //     password: values.password,
+    //   })
+    //   .then((res) => {
+    //     // save the username and password to local storage
+    //     console.log("Log in successful");
+    //   })
+    //   .catch((err) => {
+    //     console.log("Invalid Username or Password");
+    //   });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -54,14 +73,18 @@ export default function SignIn({ handleChangeLoginPage }) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        <Typography color="error">
+          {" "}
+          {isError ? "Invalid Username or Password" : ""}
+        </Typography>
 
         <Formik
           initialValues={{
             username: "",
-            password: ""
+            password: "",
           }}
           onSubmit={(values, actions) => {
-            handleSubmit();
+            handleSignIn(values);
           }}
           // validate={(values) => validate(values)}
           validationSchema={signInSchema}
@@ -77,7 +100,7 @@ export default function SignIn({ handleChangeLoginPage }) {
             handleChange,
             handleBlur,
             handleSubmit,
-            handleReset
+            handleReset,
           }) => (
             <Form className={classes.form} noValidate>
               <MyTextField

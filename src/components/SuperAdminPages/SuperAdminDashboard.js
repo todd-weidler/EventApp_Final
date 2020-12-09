@@ -99,16 +99,24 @@ function showCurrentTab(tabIndex, subpage) {
   }
 
   switch (tabIndex) {
+    // case 0:
+    //   return <SuperAdminRequestQueuePage />;
+    // case 1:
+    //   return <SuperAdminEventsPage subpage={subpage} />;
+    // case 2:
+    //   return <SuperAdminLocationsPage />;
+    // case 3:
+    //   return <SuperAdminUsersPage subpage={subpage} />;
+    // case 4:
+    //   return <SuperAdminCalendarPage />;
+    // default:
+    //   return <Redirect to="/404" />;
     case 0:
-      return <SuperAdminRequestQueuePage />;
-    case 1:
       return <SuperAdminEventsPage subpage={subpage} />;
-    case 2:
+    case 1:
       return <SuperAdminLocationsPage />;
-    case 3:
+    case 2:
       return <SuperAdminUsersPage subpage={subpage} />;
-    case 4:
-      return <SuperAdminCalendarPage />;
     default:
       return <Redirect to="/404" />;
   }
@@ -118,14 +126,9 @@ export default function SuperAdminDashboard() {
   const { page, subpage } = useParams();
   const history = useHistory();
 
-  const tabNames = ["queue", "events", "locations", "users", "calendar"];
+  // const tabNames = ["queue", "events", "locations", "users", "calendar"];
 
-  // const [currentTab, setCurrentTab] = useState(tabNames.indexOf(page));
-
-  // const handleTabChange = (event, newTabIndex) => {
-  //   history.push(`/superadmin/${tabNames[newTabIndex]}`);
-  //   setCurrentTab(newTabIndex);
-  // };
+  const tabNames = ["events", "locations", "users"];
 
   const [currentPage, setCurrentPage] = useState(tabNames.indexOf(page));
 
@@ -134,8 +137,6 @@ export default function SuperAdminDashboard() {
     history.push(`/superadmin/${tabNames[newPage]}`);
     setCurrentPage(newPage);
   };
-
-  // const tabToShow = showCurrentTab(currentPage);
 
   return (
     <div style={{ display: "flex" }}>

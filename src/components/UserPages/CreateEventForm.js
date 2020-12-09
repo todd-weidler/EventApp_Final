@@ -4,8 +4,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import { Formik, Form } from "formik";
-import CreateEventDialog from "./CreateEventDialog";
+
 import * as Yup from "yup";
+import CreateEventDialog from "./CreateEventDialog";
 
 const dummyLocations = [
   {

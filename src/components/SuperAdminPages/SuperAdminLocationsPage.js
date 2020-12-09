@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { Formik, Form } from "formik";
 import AddLocationDialog from "./AddLocationDialog";
 import * as Yup from "yup";
+import axios from "axios";
 
 const dummyLocationData = [
   {
@@ -15,7 +16,7 @@ const dummyLocationData = [
     street: "1000 Univerity Avenue",
     city: "Orlando",
     state: "Florida",
-    zipcode: "32817"
+    zipcode: "32817",
   },
   {
     locationId: "loc2",
@@ -23,7 +24,7 @@ const dummyLocationData = [
     street: "1002 Univerity Avenue",
     city: "Orlando",
     state: "Florida",
-    zipcode: "32817"
+    zipcode: "32817",
   },
   {
     locationId: "loc3",
@@ -31,7 +32,7 @@ const dummyLocationData = [
     street: "1005 Univerity Avenue",
     city: "Orlando",
     state: "Florida",
-    zipcode: "32817"
+    zipcode: "32817",
   },
   {
     locationId: "loc4",
@@ -39,7 +40,7 @@ const dummyLocationData = [
     street: "1200 Univerity Avenue",
     city: "Orlando",
     state: "Florida",
-    zipcode: "32817"
+    zipcode: "32817",
   },
   {
     locationId: "loc5",
@@ -47,7 +48,7 @@ const dummyLocationData = [
     street: "215 1st Street",
     city: "Orlando",
     state: "Florida",
-    zipcode: "32817"
+    zipcode: "32817",
   },
   {
     locationId: "loc6",
@@ -55,8 +56,8 @@ const dummyLocationData = [
     street: "700 Main Street",
     city: "Orlando",
     state: "Florida",
-    zipcode: "32817"
-  }
+    zipcode: "32817",
+  },
 ];
 // const dummyLocationData = [
 //   {
@@ -126,11 +127,11 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(5),
     marginLeft: theme.spacing(7),
-    marginRight: theme.spacing(7)
+    marginRight: theme.spacing(7),
   },
   button: {
-    margin: theme.spacing(1)
-  }
+    margin: theme.spacing(1),
+  },
 }));
 
 const addLocationSchema = Yup.object().shape({
@@ -139,7 +140,7 @@ const addLocationSchema = Yup.object().shape({
   city: Yup.string().required("City Required"),
   state: Yup.string().required("State/Province Required"),
   zipcode: Yup.string().required("Zip/Postal Code Required"),
-  country: Yup.string().required("Country Required")
+  country: Yup.string().required("Country Required"),
 });
 
 export default function SuperAdminLocationsPage() {
@@ -149,6 +150,8 @@ export default function SuperAdminLocationsPage() {
   const [locationsData, setLocationsData] = useState([]);
 
   useEffect(() => {
+    axios.get();
+
     // api call
     setLocationsData(dummyLocationData);
   }, []);
@@ -158,7 +161,7 @@ export default function SuperAdminLocationsPage() {
     let id = `loc${idNum}`;
     let newLocation = {
       locationId: id,
-      ...values
+      ...values,
     };
 
     // newLocation.locationId = id;
@@ -198,7 +201,7 @@ export default function SuperAdminLocationsPage() {
             city: "",
             state: "",
             country: "",
-            zipcode: ""
+            zipcode: "",
           }}
           onSubmit={(values, { resetForm }) => {
             handleSubmit(values);

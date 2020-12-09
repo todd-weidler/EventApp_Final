@@ -8,11 +8,11 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import CalendarIcon from "@material-ui/icons/DateRangeOutlined";
+
 import LocationIcon from "@material-ui/icons/Room";
 import UsersIcon from "@material-ui/icons/People";
 import EventIcon from "@material-ui/icons/EventAvailableRounded";
-import RequestQueueIcon from "@material-ui/icons/Assignment";
+// import RequestQueueIcon from "@material-ui/icons/Assignment";
 
 // const drawerWidth = 240;
 
@@ -21,40 +21,40 @@ const drawerWidth = 215;
 const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   drawerContainer: {
-    overflow: "auto"
+    overflow: "auto",
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
   },
   icon: {
     // "&.Mui-selected": {
     //   color: "black"
     // },
-    color: "black"
+    color: "black",
   },
   label: {
     color: "black",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 }));
 
 const StyledListItem = withStyles({
   root: {
     backgroundColor: "default",
     "&.Mui-selected": {
-      backgroundColor: "rgba(255, 193, 5, .9)"
+      backgroundColor: "rgba(255, 193, 5, .9)",
     },
     "&.Mui-selected:hover": {
-      backgroundColor: "rgba(255, 193, 5, 1)"
-    }
-  }
+      backgroundColor: "rgba(255, 193, 5, 1)",
+    },
+  },
 })(ListItem);
 
 export default function SuperAdminSideBar({ handlePageChange, currentPage }) {
@@ -65,13 +65,13 @@ export default function SuperAdminSideBar({ handlePageChange, currentPage }) {
       className={classes.drawer}
       variant="permanent"
       classes={{
-        paper: classes.drawerPaper
+        paper: classes.drawerPaper,
       }}
     >
       <Toolbar />
       <div className={classes.drawerContainer}>
         <List>
-          <StyledListItem
+          {/* <StyledListItem
             // classes={{ selected: classes.selected }}
             selected={currentPage === 0}
             button
@@ -87,6 +87,16 @@ export default function SuperAdminSideBar({ handlePageChange, currentPage }) {
               primary={"Request Queue"}
               // primaryTypographyProps={{ color: "secondary" }}
             />
+          </StyledListItem> */}
+          <StyledListItem
+            selected={currentPage === 0}
+            button
+            onClick={() => handlePageChange(0)}
+          >
+            <ListItemIcon>
+              <EventIcon className={currentPage === 0 ? classes.icon : null} />
+            </ListItemIcon>
+            <ListItemText primary={"Events"} />
           </StyledListItem>
           <StyledListItem
             selected={currentPage === 1}
@@ -94,9 +104,11 @@ export default function SuperAdminSideBar({ handlePageChange, currentPage }) {
             onClick={() => handlePageChange(1)}
           >
             <ListItemIcon>
-              <EventIcon className={currentPage === 1 ? classes.icon : null} />
+              <LocationIcon
+                className={currentPage === 1 ? classes.icon : null}
+              />
             </ListItemIcon>
-            <ListItemText primary={"Events"} />
+            <ListItemText primary={"Locations"} />
           </StyledListItem>
           <StyledListItem
             selected={currentPage === 2}
@@ -104,33 +116,9 @@ export default function SuperAdminSideBar({ handlePageChange, currentPage }) {
             onClick={() => handlePageChange(2)}
           >
             <ListItemIcon>
-              <LocationIcon
-                className={currentPage === 2 ? classes.icon : null}
-              />
-            </ListItemIcon>
-            <ListItemText primary={"Locations"} />
-          </StyledListItem>
-          <StyledListItem
-            selected={currentPage === 3}
-            button
-            onClick={() => handlePageChange(3)}
-          >
-            <ListItemIcon>
-              <UsersIcon className={currentPage === 3 ? classes.icon : null} />
+              <UsersIcon className={currentPage === 2 ? classes.icon : null} />
             </ListItemIcon>
             <ListItemText primary={"Users"} />
-          </StyledListItem>
-          <StyledListItem
-            selected={currentPage === 4}
-            button
-            onClick={() => handlePageChange(4)}
-          >
-            <ListItemIcon>
-              <CalendarIcon
-                className={currentPage === 4 ? classes.icon : null}
-              />
-            </ListItemIcon>
-            <ListItemText primary={"Calendar"} />
           </StyledListItem>
         </List>
         <Divider />
